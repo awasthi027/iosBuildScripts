@@ -1,0 +1,90 @@
+module Fastlane
+  module Actions
+    module SharedValues
+        # MANDATORY
+           WORKSPACE_NAME = :WORKSPACE_NAME                  #Should include .xcodeproj or .xcworkspace
+           WORKSPACE_SCHEME = :WORKSPACE_SCHEME
+           DEVELOPER_DIR = :DEVELOPER_DIR
+           PROJECT_NAME = :PROJECT_NAME  
+
+           # OPTIONAL
+           SKIP_LINT_TESTS                                     = :SKIP_LINT_TESTS # skill Test in list
+           USE_STATIC_FRAMEWORKS_FOR_PODSPEC_LINT              = :USE_STATIC_FRAMEWORKS_FOR_PODSPEC_LINT
+           SIMULATOR_NAME                                      = :SIMULATOR_NAME                        # defaults to {WORKSPACE_SCHEME}Simulator
+           SIMULATOR_RUNTIME                                   = :SIMULATOR_RUNTIME                  # defaults to "17-0"
+           SIMULATOR_DEVICE_TYPE                               = :SIMULATOR_DEVICE_TYPE          # defaults to "iPhone-14"
+           POD_INSTALL_REQUIRED                                = :POD_INSTALL_REQUIRED            # defaults to false
+           BRANCH_NAME_FOR_POD_CREATION                        = :BRANCH_NAME_FOR_POD_CREATION # the branch for which new podspec versions will be pushed
+           VERSION_DIGIT_TO_BUMP                               = :VERSION_DIGIT_TO_BUMP
+           GENRIC_MESSAGE                                      = :GENRIC_MESSAGE # It's generic Message 
+           # GENERIC GENERATED CONSTANTS
+           WORKING_DIRECTORY = :WORKING_DIRECTORY
+
+     end # End of SharedValues
+
+
+    class DetectEnvironmentInformationAction < Action
+
+        def self.run(params)
+            setUniversalConstants
+            readMandatoryVariablesFromENVFIle
+            readOptionalVariablesFromENVFIle
+            # file to file call
+            other_action.check_xcode_version_existance
+        end
+
+        # reads in the environment variables from the .env file that are condisidered mandatory
+        def self.readMandatoryVariablesFromENVFIle
+               UI.important("Reading Mandatory Variables From .env File...")
+               Actions.lane_context[SharedValues::WORKSPACE_NAME] = readENVValue(key:'WORKSPACE_NAME', mandatory:true)
+               Actions.lane_context[SharedValues::WORKSPACE_SCHEME] = readENVValue(key:'WORKSPACE_SCHEME', mandatory:true)
+               Actions.lane_context[SharedValues::DEVELOPER_DIR] = readENVValue(key:'DEVELOPER_DIR', mandatory:true)
+               Actions.lane_context[SharedValues::PROJECT_NAME] = readENVValue(key:'PROJECT_NAME', mandatory:true)
+        end # function end readMandatoryVariablesFromENVFIle
+
+
+        def self.readOptionalVariablesFromENVFIle
+
+             Actions.lane_context[SharedValues::SKIP_LINT_TESTS] = readENVValue(key:'SKIP_LINT_TESTS', mandatory:false, defaultValue: false)
+             Actions.lane_context[SharedValues::USE_STATIC_FRAMEWORKS_FOR_PODSPEC_LINT] = readENVValue(key:'USE_STATIC_FRAMEWORKS_FOR_PODSPEC_LINT', mandatory:false, defaultValue: false)
+            Actions.lane_context[SharedValues::GENRIC_MESSAGE] = readENVValue(key:'GENRIC_MESSAGE', mandatory:false, defaultValue: false)
+
+        end # function end readOptionalVariablesFromENVFIle
+
+
+        # read value for params[:key] from the .env file
+           # if params[:mandatory] is true, fail fastlane execution if value is not found
+           # if params[:defaultValue] is provided, the default value will be assigned if value is not found
+        def self.readENVValue(params)
+             value = ENV[params[:key]]
+             UI.message("Reading ENV Value for Key: " + params[:key] + " Value Found: " + value.to_s)
+             if value.to_s.empty? #if nil or empty
+               if params.has_key?(:defaultValue)
+                 value = params[:defaultValue]
+                 UI.message("Assigning default value of " + value.to_s + " for Key: " + params[:key])
+               end
+               if params[:mandatory]
+                 UI.user_error!("Mandatory .env value: " + params[:key] + " was not found in .env file")
+               end
+             end
+             return value
+        end # function end readENVValue
+
+          # Set shared values that are universal constants and should not need to be changed
+        def self.setUniversalConstants
+        Actions.lane_context[SharedValues::WORKING_DIRECTORY] = Actions.sh('pwd', log: false).to_s.gsub("\n",'')
+        end  # function end setUniversalConstants
+
+        def self.description
+         "Reads in environment variables from .env file and adds them to lane_context."
+        end
+
+        def self.is_supported?(platform)
+         [:ios, :mac].include?(platform)
+        end
+
+
+    end # End of DetectEnvironmentInformationAction
+
+  end # End of Actions
+end # End of Fastlane

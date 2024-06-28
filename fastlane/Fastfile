@@ -11,13 +11,36 @@
 #
 
 # Uncomment the line if you want fastlane to automatically update itself
-# update_fastlane
-
-default_platform(:ios)
 
 platform :ios do
-  desc "Creating first fast lance"
-  lane :firstTestLane do
-   puts "Hello I am first test lane"
+
+  before_all do |lane, options|
+     detect_environment_information
+    
+     after_all do |lane, options|
+
+     end
+
+     error do |lane, exception|
+       UI.error("Error block excecuting...")
+       UI.error("|Error block| lane = " + lane.to_s)
+       UI.error("|Error block| exception = " + exception.to_s)
+     end
+     
   end
+
+ lane :printMessageLane do
+       UI.message("Ready to execute fastlane script testing is done")
+  end
+
+ lane :readMessagLane do
+       UI.message("Reading Message from Envioroment which present on Source directory: " + Actions.lane_context[SharedValues::GENRIC_MESSAGE].to_s)
+  end
+
+ lane :podLibLint do
+      pod_lib_lint
+  end
+
 end
+
+
