@@ -15,13 +15,13 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ## iOS
 
-### ios firstTestLane
+### ios podLibLint
 
 ```sh
-[bundle exec] fastlane ios firstTestLane
+[bundle exec] fastlane ios podLibLint
 ```
 
-Creating first fast lance
+
 
 ----
 
