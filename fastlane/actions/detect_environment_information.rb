@@ -5,7 +5,9 @@ module Fastlane
            WORKSPACE_NAME = :WORKSPACE_NAME                  #Should include .xcodeproj or .xcworkspace
            WORKSPACE_SCHEME = :WORKSPACE_SCHEME
            DEVELOPER_DIR = :DEVELOPER_DIR
-           PROJECT_NAME = :PROJECT_NAME  
+           PROJECT_NAME = :PROJECT_NAME
+           SIMULATOR_RUNTIME = :SIMULATOR_RUNTIME
+           SIMULATOR_DEVICE_TYPE = :SIMULATOR_DEVICE_TYPE  
 
            # OPTIONAL
            SKIP_LINT_TESTS                                     = :SKIP_LINT_TESTS # skill Test in list
@@ -40,6 +42,8 @@ module Fastlane
                Actions.lane_context[SharedValues::WORKSPACE_SCHEME] = readENVValue(key:'WORKSPACE_SCHEME', mandatory:true)
                Actions.lane_context[SharedValues::DEVELOPER_DIR] = readENVValue(key:'DEVELOPER_DIR', mandatory:true)
                Actions.lane_context[SharedValues::PROJECT_NAME] = readENVValue(key:'PROJECT_NAME', mandatory:true)
+               Actions.lane_context[SharedValues::SIMULATOR_RUNTIME] = readENVValue(key:'SIMULATOR_RUNTIME', mandatory:true)
+               Actions.lane_context[SharedValues::SIMULATOR_DEVICE_TYPE] = readENVValue(key:'SIMULATOR_DEVICE_TYPE', mandatory:true)
         end # function end readMandatoryVariablesFromENVFIle
 
 

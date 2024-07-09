@@ -15,6 +15,30 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ## iOS
 
+### ios printMessageLane
+
+```sh
+[bundle exec] fastlane ios printMessageLane
+```
+
+
+
+### ios readMessagLane
+
+```sh
+[bundle exec] fastlane ios readMessagLane
+```
+
+
+
+### ios buildiOSSource
+
+```sh
+[bundle exec] fastlane ios buildiOSSource
+```
+
+
+
 ### ios podLibLint
 
 ```sh

@@ -37,6 +37,10 @@ platform :ios do
        UI.message("Reading Message from Envioroment which present on Source directory: " + Actions.lane_context[SharedValues::GENRIC_MESSAGE].to_s)
   end
 
+ lane :buildiOSSource do
+      build_source_code
+  end
+
  lane :podLibLint do
       pod_lib_lint
   end
