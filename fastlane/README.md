@@ -39,6 +39,14 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 
 
+### ios testiOSSource
+
+```sh
+[bundle exec] fastlane ios testiOSSource
+```
+
+
+
 ### ios podLibLint
 
 ```sh
