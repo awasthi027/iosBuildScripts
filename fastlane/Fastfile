@@ -41,6 +41,10 @@ platform :ios do
       build_source_code
   end
 
+ lane :testiOSSource do
+      test_source_code
+  end
+
  lane :podLibLint do
       pod_lib_lint
   end
