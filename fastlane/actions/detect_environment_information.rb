@@ -18,10 +18,11 @@ module Fastlane
            POD_INSTALL_REQUIRED                                = :POD_INSTALL_REQUIRED            # defaults to false
            BRANCH_NAME_FOR_POD_CREATION                        = :BRANCH_NAME_FOR_POD_CREATION # the branch for which new podspec versions will be pushed
            VERSION_DIGIT_TO_BUMP                               = :VERSION_DIGIT_TO_BUMP
-           GENRIC_MESSAGE                                      = :GENRIC_MESSAGE # It's generic Message 
+           REPO_URL                                            = :REPO_URL  
            # GENERIC GENERATED CONSTANTS
-           WORKING_DIRECTORY = :WORKING_DIRECTORY
-           XSW_FRAMEWORK = :XSW_FRAMEWORK
+           WORKING_DIRECTORY                                   = :WORKING_DIRECTORY
+           XSW_FRAMEWORK                                       = :XSW_FRAMEWORK
+           GENRIC_MESSAGE                                      = :GENRIC_MESSAGE # It's generic Message 
 
      end # End of SharedValues
 
@@ -51,10 +52,12 @@ module Fastlane
 
         def self.readOptionalVariablesFromENVFIle
 
-             Actions.lane_context[SharedValues::SKIP_LINT_TESTS] = readENVValue(key:'SKIP_LINT_TESTS', mandatory:false, defaultValue: false)
-             Actions.lane_context[SharedValues::USE_STATIC_FRAMEWORKS_FOR_PODSPEC_LINT] = readENVValue(key:'USE_STATIC_FRAMEWORKS_FOR_PODSPEC_LINT', mandatory:false, defaultValue: false)
-             Actions.lane_context[SharedValues::GENRIC_MESSAGE] = readENVValue(key:'GENRIC_MESSAGE', mandatory:false, defaultValue: false)
-             Actions.lane_context[SharedValues::XSW_FRAMEWORK] = readENVValue(key:'XSW_FRAMEWORK', mandatory:false)
+             Actions.lane_context[SharedValues::SKIP_LINT_TESTS]                         = readENVValue(key:'SKIP_LINT_TESTS', mandatory:false, defaultValue: false)
+             Actions.lane_context[SharedValues::USE_STATIC_FRAMEWORKS_FOR_PODSPEC_LINT]  = readENVValue(key:'USE_STATIC_FRAMEWORKS_FOR_PODSPEC_LINT', mandatory:false, defaultValue: false)
+             Actions.lane_context[SharedValues::GENRIC_MESSAGE]                          = readENVValue(key:'GENRIC_MESSAGE', mandatory:false, defaultValue: false)
+             Actions.lane_context[SharedValues::XSW_FRAMEWORK]                           = readENVValue(key:'XSW_FRAMEWORK', mandatory:false)
+             Actions.lane_context[SharedValues::REPO_URL]                                = readENVValue(key:'REPO_URL', mandatory:false)
+
 
         end # function end readOptionalVariablesFromENVFIle
 
