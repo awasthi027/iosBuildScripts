@@ -5,12 +5,12 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: detect_environment_information" time="0.130932">
+      <testcase classname="fastlane.lanes" name="0: detect_environment_information" time="0.172627">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: test_source_code" time="29.578217">
+      <testcase classname="fastlane.lanes" name="1: publish_pod" time="31.839755">
         
       </testcase>
     

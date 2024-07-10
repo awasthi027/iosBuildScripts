@@ -49,6 +49,10 @@ platform :ios do
       pod_lib_lint
   end
 
+  lane :publishNewPodSpec do
+      publish_pod
+  end
+
 end
 
 
