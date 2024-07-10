@@ -16,8 +16,6 @@ module Fastlane
             return
         end
 
-        #setGITSSHRemoteAndUserInfo
-        #setGITRemoteAndUserInfo
         # (1) Get podspec Location, tagPrefix, Current Version
         workingDirectory = Actions.lane_context[SharedValues::WORKING_DIRECTORY]
 
@@ -223,7 +221,7 @@ module Fastlane
 
       def self.getCurrentlyAvailablePodVersions(podspecName)
         UI.message("Searching for pod versions of pod named: " + podspecName)
-        Actions.sh("pod install")
+        Actions.sh("pod install") # Needed in case search command fail, Just add pod file in your directory with lib pod 
         searchResults = Actions.sh("pod search " + podspecName + " --simple --no-pager").split("\n")
         availableVersions = []
         if searchResults.count > 0
@@ -275,21 +273,7 @@ module Fastlane
       #   other_action.notify_slack(success:true, messageSubject:"Publishing " + podspecName + " version (" + newVersion.to_s + ")")
       # end
 
-      # def self.setGITSSHRemoteAndUserInfo
-      #     sshRepoURL = Actions.lane_context[SharedValues::SSH_REPO_URL]
-      #     UI.important("ssh Repo URL: " + sshRepoURL)
-      #     Actions.sh("git remote set-url origin " + sshRepoURL)
-      #     Actions.sh("git config user.name \"SDK Pod Publisher\"")
-      #     Actions.sh("git config user.email \"stash-iossdk-svc@vmware.com\"")
-      # end
-
-#      def self.setGITRemoteAndUserInfo
-#          httpRepoURL = Actions.lane_context[SharedValues::HTTPS_REPO_URL]
-#          Actions.sh("git remote set-url origin https://stash-iossdk-svc:DFgJJk0LjN87" + httpRepoURL)
-#          Actions.sh("git config user.name \"SDK Pod Publisher\"")
-#          Actions.sh("git config user.email \"stash-iossdk-svc@vmware.com\"")
-#      end
-
+  
 
       # validate that the current project is a framework and fail with error message if it is not since
       # validate that the current branch is registered as the branch for podspec creation
