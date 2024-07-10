@@ -21,6 +21,7 @@ module Fastlane
            GENRIC_MESSAGE                                      = :GENRIC_MESSAGE # It's generic Message 
            # GENERIC GENERATED CONSTANTS
            WORKING_DIRECTORY = :WORKING_DIRECTORY
+           XSW_FRAMEWORK = :XSW_FRAMEWORK
 
      end # End of SharedValues
 
@@ -33,6 +34,7 @@ module Fastlane
             readOptionalVariablesFromENVFIle
             # file to file call
             other_action.check_xcode_version_existance
+            other_action.get_current_branch_name
         end
 
         # reads in the environment variables from the .env file that are condisidered mandatory
@@ -51,7 +53,8 @@ module Fastlane
 
              Actions.lane_context[SharedValues::SKIP_LINT_TESTS] = readENVValue(key:'SKIP_LINT_TESTS', mandatory:false, defaultValue: false)
              Actions.lane_context[SharedValues::USE_STATIC_FRAMEWORKS_FOR_PODSPEC_LINT] = readENVValue(key:'USE_STATIC_FRAMEWORKS_FOR_PODSPEC_LINT', mandatory:false, defaultValue: false)
-            Actions.lane_context[SharedValues::GENRIC_MESSAGE] = readENVValue(key:'GENRIC_MESSAGE', mandatory:false, defaultValue: false)
+             Actions.lane_context[SharedValues::GENRIC_MESSAGE] = readENVValue(key:'GENRIC_MESSAGE', mandatory:false, defaultValue: false)
+             Actions.lane_context[SharedValues::XSW_FRAMEWORK] = readENVValue(key:'XSW_FRAMEWORK', mandatory:false)
 
         end # function end readOptionalVariablesFromENVFIle
 
