@@ -246,6 +246,11 @@ module Fastlane
       end
 
       def self.pushNewPodspec(podspecLocation)
+        UI.message("Appplying Remote user settings......")
+        Actions.sh("git config user.name Automated User")
+        Actions.sh("git config user.email actions@users.noreply.github.com")
+        Actions.sh("git config --unset-all http.https://github.com/.extraheader")
+
         UI.message("Pushing new podspec...")
         UI.message("USE_STATIC_FRAMEWORKS_FOR_PODSPEC_LINT value: " + Actions.lane_context[SharedValues::USE_STATIC_FRAMEWORKS_FOR_PODSPEC_LINT].to_s)
         command = "pod repo push awasthi027-ios-spec " + podspecLocation + " --allow-warnings --verbose"
