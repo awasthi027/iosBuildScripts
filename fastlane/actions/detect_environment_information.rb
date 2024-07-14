@@ -34,7 +34,7 @@ module Fastlane
             readMandatoryVariablesFromENVFIle
             readOptionalVariablesFromENVFIle
             # file to file call
-            #other_action.check_xcode_version_existance
+            other_action.check_xcode_version_existance
             other_action.get_current_branch_name
         end
 
