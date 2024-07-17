@@ -53,6 +53,10 @@ platform :ios do
       publish_pod
   end
 
+  lane :publishSPM do
+      publish_s_p_m
+  end
+
 end
 
 
