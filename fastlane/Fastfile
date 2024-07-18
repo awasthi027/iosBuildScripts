@@ -57,6 +57,11 @@ platform :ios do
       publish_s_p_m
   end
 
+  lane :createXCFramework do
+      generate_xc_framework
+  end
+
+
 end
 
 
